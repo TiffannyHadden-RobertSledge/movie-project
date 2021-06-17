@@ -50,3 +50,11 @@ $("#submitButton").on("click", function (event) {
 			getAllMovies()
 		});
 })
+
+fetch("https://hazel-distinct-waiter.glitch.me/movies", {
+	method: "PATCH",
+	headers: {
+		'Content-Type': 'application/json',
+	},
+	body: JSON.stringify({title, rating}),
+})
