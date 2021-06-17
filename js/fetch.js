@@ -20,6 +20,7 @@ window.onload = function () {
 
 function buildMovieList(data) {
 	let output = "";
+	$("#movies").empty();
 	for (let i = 0; i < data.length; i++) {
 		output += "<h4>" + data[i].title + "</h4>";
 		output += "<p>" + data[i].actors + "</p>";
@@ -34,15 +35,18 @@ function displayMovies(listOfMovies) {
 }
 
 $("#submitButton").on("click", function (event) {
-	event.preventDefault();
-	let postTitle = $("#title").value
-	let postRating = $("#rating").value
-	console.log(postTitle);
-	console.log(postRating);
+	let title = $("#title").val()
+	let rating = $("#rating").val()
 	fetch("https://hazel-distinct-waiter.glitch.me/movies", {
 		method: "POST",
-		headers: {},
-		body: {title: postTitle, rating: postRating}
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({title, rating}),
 	})
-		.then(response => console.log(response.json()));
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+			getAllMovies()
+		});
 })
