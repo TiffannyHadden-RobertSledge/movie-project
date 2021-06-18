@@ -3,11 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Movie Project</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
     <div id="movies">
 
     </div>
+    <h2>Add a new movie</h2>
         <form>
             <label for="title">Movie Title:</label>
             <input id="title" name="title" type="text">
@@ -15,6 +17,14 @@
 
             <label for="rating">Rating:</label>
             <input id="rating" name="rating" type="number" max="5">
+            <br>
+
+            <label for="actors">Actors: </label>
+            <textarea id="actors" rows="5" cols="22"></textarea>
+            <br>
+
+            <label for="plot">Plot: </label>
+            <textarea id="plot" rows="5" cols="22"></textarea>
             <br>
 
             <button id="submitButton" type="button">Add Movie</button>
