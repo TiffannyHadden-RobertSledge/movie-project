@@ -1,5 +1,5 @@
 "use strict";
-getAllMovies()
+getAllMovies();
 
 // displayMovies(buildMovieList(getAllMovies))
 
@@ -10,12 +10,13 @@ function getAllMovies() {
 	})
 		.then(response => response.json())
 		.then(data => {
+			console.log(data);
 			displayMovies((buildMovieList(data)))
 		})
 }
 
 window.onload = function () {
-	alert("Window is loading");
+	// alert("Window is loading");
 }
 
 function buildMovieList(data) {
@@ -35,8 +36,14 @@ function displayMovies(listOfMovies) {
 }
 
 $("#submitButton").on("click", function (event) {
+	console.log("adding movie")
+	addMovie();
+});
+
+function addMovie() {
 	let title = $("#title").val()
 	let rating = $("#rating").val()
+
 	fetch("https://hazel-distinct-waiter.glitch.me/movies", {
 		method: "POST",
 		headers: {
@@ -48,13 +55,16 @@ $("#submitButton").on("click", function (event) {
 		.then(data => {
 			console.log(data)
 			getAllMovies()
-		});
-})
+			});
+
+}
+
 
 fetch("https://hazel-distinct-waiter.glitch.me/movies", {
-	method: "PATCH",
+	method: "PUT",
 	headers: {
 		'Content-Type': 'application/json',
 	},
 	body: JSON.stringify({title, rating}),
 })
+	.then(response => console.log(response.json()))
