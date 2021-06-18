@@ -3,11 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Movie Project</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
     <div id="movies">
 
     </div>
+    <h2>Add a new movie</h2>
         <form>
             <label for="title">Movie Title:</label>
             <input id="title" name="title" type="text">
@@ -20,6 +22,19 @@
             <button id="submitButton" type="button">Add Movie</button>
 
         </form>
+    <h2>Edit movie information</h2>
+    <form>
+        <label for="editTitle">Movie Title:</label>
+        <input id="editTitle" name="title" type="text">
+        <br>
+
+        <label for="editRating">Rating:</label>
+        <input id="editRating" name="rating" type="number" max="5">
+        <br>
+
+        <button id="button" type="button">Add Movie</button>
+
+    </form>
         <script src="js/jquery/jquery-2.2.4.js"></script>
         <script src="js/fetch.js"></script>
     </body>
