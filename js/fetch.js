@@ -16,31 +16,50 @@ $(".editButton").on("click", function() {
 	$(".hideMe").toggle();
 })
 
+// getAllMovies().then((movies) => {
+//
+// }).catch((error) => {
+//
+// });
+
 function getAllMovies() {
+	console.log("getting all movies")
 	fetch("https://hazel-distinct-waiter.glitch.me/movies", {
 		method: "GET",
 	})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
-			displayMovies((buildMovieList(data)))
+			console.log('Here are all the movies:');
+			data.forEach(({title, genre, rating, id}) => {
+				let newTitle = `${title}`;
+				let newGenre = `${genre}`;
+				let newRating = `${rating}`;
+				let newID = `${id}`;
+				makeCard(newTitle, newGenre, newRating, newID);
+			});
 		})
 }
 
-function buildMovieList(data) {
-	let output = "";
-	$("#movies").empty();
-	for (let i = 0; i < data.length; i++) {
-		output += "<div class='card'>";
-		output += "<h4>" + data[i].title + "</h4>";
-		output += "<p>" + data[i].actors + "</p>";
-		output += "<p>" + data[i].plot + "</p>";
-		output += "<p>" + data[i].rating + "</p>";
-		output += "<button type='button' class='editButton'>Edit Movie</button>"
-		output += buildEditForm(data[i]);
-		output += "</div>"
-	}
-	return output;
+function makeCard(title, genre, rating, id) {
+
+	let card;
+	card = "";
+	card += `<div class="card">`;
+	card += `<div class="card-body">`;
+	card += `<p class="card-text mb-0">${title} <br> ${genre}<br> ${rating}</p>`;
+	card += `</div>`;
+	card += `<div id="">`;
+	card += `<button>Edit Movie</button>`;
+	card += `<button class="deleteMovie" id="${id}">Delete Movie</button>`;
+	card += buildEditForm(title, genre, rating, id);
+	card += `</div>`;
+	card += `</div></div>`;
+	document.getElementById("movies").innerHTML += card;
+
+	$(".deleteMovie").click(function() {
+		let uniqueID = $(this).attr("id");
+		deleteMovie(uniqueID)
+	})
 }
 
 function displayMovies(listOfMovies) {
@@ -51,13 +70,15 @@ function displayMovies(listOfMovies) {
 function addMovie() {
 	let title = $("#title").val()
 	let rating = $("#rating").val()
+	let actors = $("#actors").val()
+	let plot = $("#plot").val()
 
 	fetch("https://hazel-distinct-waiter.glitch.me/movies", {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({title, rating}),
+		body: JSON.stringify({title, rating, actors, plot}),
 	})
 		.then(response => response.json())
 		.then(data => {
@@ -121,4 +142,17 @@ function editMovie(title, rating, director, year, plot, genre, actors) {
 		body: JSON.stringify({title, rating, director, year, plot, genre, actors}),
 	})
 		.then(response => console.log(response.json()))
+}
+
+function deleteMovie(id) {
+	fetch(`https://hazel-distinct-waiter.glitch.me/movies/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	}).then(response => console.log("deleting"));
+}
+
+function dummyFunction() {
+
 }
