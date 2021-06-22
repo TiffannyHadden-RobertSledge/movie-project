@@ -38,7 +38,7 @@ function buildMovieList(data) {
 		output += "<p>" + data[i].rating + "</p>";
 		output += "<button type='button' class='editButton'>Edit Movie</button>"
 		// output += buildEditForm();
-		output += getFormInfo(data[i]);
+		// output += getFormInfo(data[i]);
 		output += "</div>"
 	}
 	return output;
@@ -57,16 +57,18 @@ function makeCard(data) {
 		<p>${data[i].rating}</p>
 		<button type="button" id="editButton">Edit Movie</button>
 		<button type="button" id="deleteButton">Delete Movie</button>
-		${buildEditForm(data[i])}
+		${buildEditForm(data[i].id)}
 `
 
 	}
+
 	return card;
 }
 
 
 function displayMovies(listOfMovies) {
 	$("#movies").append(listOfMovies);
+	setEditClickEvent();
 }
 
 
@@ -88,55 +90,57 @@ function addMovie() {
 		});
 }
 
-function buildEditForm() {
+function buildEditForm(id) {
 	let form = "<form class='hideMe'>";
 
-	form += "<label for='editTitle'>Title</label><input id='editTitle'" +
+	form += "<label for='editTitle'>Title</label><input class='editTitle'" +
 		" name='editTitle' type='text'>";
 
-	form += "<label for='editRating'>Rating</label><input id='editRating'" +
+	form += "<label for='editRating'>Rating</label><input class='editRating'" +
 		" name='editRating' type='number' max='5'>";
 
 
-	form += "<label for='editActors'>Actors</label><input id='editActors'" +
+	form += "<label for='editActors'>Actors</label><input class='editActors'" +
 		" name='editActors' type='text'>";
 
 
-	form += "<label for='editPlot'>Plot</label><input id='editPlot'" +
+	form += "<label for='editPlot'>Plot</label><input class='editPlot'" +
 		" name='editPLot' type='text'>";
 
 
-	form += "<label for='editDirector'>Director</label><input id='editDirector'" +
+	form += "<label for='editDirector'>Director</label><input class='editDirector'" +
 		" name='editDirector' type='text'>";
 
 
-	form += "<label for='editYear'>Year</label><input id='editYear'" +
+	form += "<label for='editYear'>Year</label><input class='editYear'" +
 		" name='editYear' type='year'>";
 
 
-	form += "<label for='editGenre'>Genre</label><input id='editGenre'" +
+	form += "<label for='editGenre'>Genre</label><input class='editGenre'" +
 		" name='editGenre' type='text'>";
 
 
-	form += "<button type='button' class='editMovies' id='editMovies'>Submit" +
+	form += "<button type='button' data-value='${id}' class='editMovies'>Submit" +
 		" Changes</button>"
 
 	form += "</form>";
 
 	return form;
 }
-function getFormInfo(info) {
-	let movie = {
-		title: $(this),
-		plot: info.plot,
-		actors: info.actors,
-		rating: info.rating,
-		genre: info.genre,
-		year: info.year
-	}
-	$("#editMovies").on("click", function () {
-		console.log("Editing current movie");
-		editMovie(movie, info.id);
+function setEditClickEvent() {
+
+	$(".editMovies").on("click", function () {
+		let editForm = $(this).parent();
+		let movie = {
+			title: editForm.find(".editTitle").val(),
+			plot: editForm.find(".editPlot").val(),
+			actors: editForm.find(".editActors").val(),
+			rating: editForm.find(".editRating").val(),
+			genre: editForm.find(".editGenre").val(),
+			year: editForm.find(".editYear").val()
+		}
+		console.log(movie);
+		editMovie(movie, $(this).attr("data-value"));
 	})
 }
 function editMovie(movie, id) {
