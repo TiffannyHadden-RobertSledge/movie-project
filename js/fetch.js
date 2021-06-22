@@ -120,7 +120,7 @@ function buildEditForm(id) {
 		" name='editGenre' type='text'>";
 
 
-	form += "<button type='button' data-value='${id}' class='editMovies'>Submit" +
+	form += `<button type='button' data-value='${id}' class='editMovies'>Submit` +
 		" Changes</button>"
 
 	form += "</form>";
@@ -140,7 +140,9 @@ function setEditClickEvent() {
 			year: editForm.find(".editYear").val()
 		}
 		console.log(movie);
+		$("#movies").empty();
 		editMovie(movie, $(this).attr("data-value"));
+
 	})
 }
 function editMovie(movie, id) {
