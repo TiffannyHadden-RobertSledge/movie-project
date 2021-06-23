@@ -1,3 +1,41 @@
-/*.hideMe{*/
-/*    display: none;*/
-/*}*/
+.hideMe{
+    display: none;
+}
+html, body {
+    height: 100%;
+    background-color: darkslategrey;
+}
+
+.jumbotron {
+    /*background-image:*/
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+h2 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+
+}
+
+
+
+.card {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+}
+
+.card button {
+    background-color: dimgrey;
+    border-color: black;
+    color: #c8980a;
+}
+
+
