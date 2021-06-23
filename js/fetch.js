@@ -11,37 +11,15 @@ $("#submitButton").on("click", function () {
 	addMovie();
 });
 
-$(".editButton").on("click", function () {
-	console.log("clicked");
-	$(".hideMe").toggle();
-})
-
 function getAllMovies() {
 	fetch("https://hazel-distinct-waiter.glitch.me/movies", {
 		method: "GET",
 	})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
+			// console.log(data);
 			displayMovies((makeCard(data)))
 		})
-}
-
-function buildMovieList(data) {
-	let output = "";
-	$("#movies").empty();
-	for (let i = 0; i < data.length; i++) {
-		output += "<div class='card'>";
-		output += "<h4>" + data[i].title + "</h4>";
-		output += "<p>" + data[i].actors + "</p>";
-		output += "<p>" + data[i].plot + "</p>";
-		output += "<p>" + data[i].rating + "</p>";
-		output += "<button type='button' class='editButton'>Edit Movie</button>"
-		// output += buildEditForm();
-		// output += getFormInfo(data[i]);
-		output += "</div>"
-	}
-	return output;
 }
 
 function makeCard(data) {
@@ -55,19 +33,25 @@ function makeCard(data) {
 		<p>${data[i].plot}</p>
 		<p>${data[i].genre}</p>
 		<p>${data[i].rating}</p>
-		<button type="button" id="editButton">Edit Movie</button>
-		<button type="button" id="deleteButton">Delete Movie</button>
+		<button type="button" class="editButton">Edit Movie</button>
+		<button class="deleteMovie" id="${data[i].id}">Delete Movie</button>
 		${buildEditForm(data[i].id)}
 `
 
-	}
+		$(".deleteMovie").on("click", function(){
+			let uniqueID = $(this).attr("id");
+			console.log("clicked");
+			deleteMovie(uniqueID);
+		})
 
+	}
 	return card;
 }
 
 
 function displayMovies(listOfMovies) {
 	$("#movies").append(listOfMovies);
+	setToggleEventListener();
 	setEditClickEvent();
 }
 
@@ -140,9 +124,8 @@ function setEditClickEvent() {
 			year: editForm.find(".editYear").val()
 		}
 		console.log(movie);
-		$("#movies").empty();
 		editMovie(movie, $(this).attr("data-value"));
-
+		$("#movies").empty();
 	})
 }
 function editMovie(movie, id) {
@@ -154,4 +137,26 @@ function editMovie(movie, id) {
 		body: JSON.stringify(movie),
 	})
 		.then(response => console.log(response.json()))
+		.then(() => location.reload())
+}
+function setToggleEventListener(){
+	$(".editButton").on("click", function () {
+		$(".hideMe").toggle();
+	})
+
+	$(".deleteMovie").click(function() {
+		let uniqueID = $(this).attr("id");
+		console.log("clicked");
+		deleteMovie(uniqueID)
+	})
+}
+
+function deleteMovie(id) {
+	fetch(`https://hazel-distinct-waiter.glitch.me/movies/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	}).then(response => console.log("deleting"))
+		.then(() => location.reload())
 }
