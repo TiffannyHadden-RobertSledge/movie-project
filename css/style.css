@@ -2,10 +2,10 @@
     display: none;
 }
 
-html, body {
-    height: 100%;
-    background-color: darkslategrey;
-}
+/*html, body {*/
+/*    !*height: 100%;*!*/
+/*    background-color: darkslategrey;*/
+/*}*/
 
 .jumbotron {
     /*background-image:*/

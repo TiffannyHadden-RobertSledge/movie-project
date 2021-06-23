@@ -4,7 +4,10 @@
         <meta charset="UTF-8">
         <title>Movie Project</title>
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
         <div class="jumbotron">
             <h1 class="display-4">Movie App!</h1>
             <p class="lead"></p>
@@ -13,34 +16,45 @@
         </div>
     </head>
     <body>
-    <div id="movies">
+        <div id="movies" class="row">
 
-    </div>
-    <h2>Add a new movie</h2>
-        <form>
-            <label for="title">Movie Title:</label>
-            <input id="title" name="title" type="text">
-            <br>
+        </div>
 
-            <label for="rating">Rating:</label>
-            <input id="rating" name="rating" type="number" max="5">
-            <br>
+        <div class="text-center">
+            <h2>Add a new movie</h2>
+            <form>
+                <label for="title">Movie Title:</label>
+                <input id="title" name="title" type="text">
+                <br>
 
-            <label for="actors">Actors: </label>
-            <textarea id="actors" rows="5" cols="22"></textarea>
-            <br>
+                <label for="rating">Rating:</label>
+                <input id="rating" name="rating" type="number" max="5">
+                <br>
 
-            <label for="plot">Plot: </label>
-            <textarea id="plot" rows="5" cols="22"></textarea>
-            <br>
+                <label for="actors">Actors: </label>
+                <textarea id="actors" rows="3" cols="18"></textarea>
+                <br>
 
-            <button id="submitButton" type="button">Add Movie</button>
+                <label for="plot">Plot: </label>
+                <textarea id="plot" rows="3" cols="18"></textarea>
+                <br>
 
-        </form>
+                <button id="submitButton" type="button">Add Movie</button>
+
+            </form>
+        </div>
+
+
         <script src="js/jquery/jquery-2.2.4.js"></script>
         <script src="js/fetch.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
     </body>
 </html>

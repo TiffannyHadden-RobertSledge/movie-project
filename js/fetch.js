@@ -27,18 +27,20 @@ function makeCard(data) {
 	$("#movies").empty();
 	for (let i = 0; i < data.length; i++) {
 		card += `
-		<div class="card">
-		<h4>${data[i].title}</h4>
-		<p>${data[i].actors}</p>
-		<p>${data[i].plot}</p>
-		<p>${data[i].genre}</p>
-		<p>${data[i].rating}</p>
-		<button type="button" class="editButton">Edit Movie</button>
-		<button class="deleteMovie" id="${data[i].id}">Delete Movie</button>
-		${buildEditForm(data[i].id)}
+		<div class="card col-3">
+            <div class="hideOnEdit">
+                <h4>${data[i].title}</h4>
+                <p>${data[i].actors}</p>
+                <p>${data[i].plot}</p>
+                <p>${data[i].genre}</p>
+                <p>${data[i].rating}</p>
+                <button type="button" class="editButton">Edit Movie</button>
+            </div>
+            <button class="deleteMovie" id="${data[i].id}">Delete Movie</button>
+            ${buildEditForm(data[i].id)}
+        </div>
 `
-
-		$(".deleteMovie").on("click", function(){
+		$(".deleteMovie").on("click", function () {
 			let uniqueID = $(this).attr("id");
 			console.log("clicked");
 			deleteMovie(uniqueID);
@@ -104,13 +106,14 @@ function buildEditForm(id) {
 		" name='editGenre' type='text'>";
 
 
-	form += `<button type='button' data-value='${id}' class='editMovies'>Submit` +
+	form += `<button type="button" data-value="${id}" class="editMovies">Submit` +
 		" Changes</button>"
 
 	form += "</form>";
 
 	return form;
 }
+
 function setEditClickEvent() {
 
 	$(".editMovies").on("click", function () {
@@ -128,6 +131,7 @@ function setEditClickEvent() {
 		$("#movies").empty();
 	})
 }
+
 function editMovie(movie, id) {
 	fetch(`https://hazel-distinct-waiter.glitch.me/movies/${id}`, {
 		method: "PATCH",
@@ -139,12 +143,15 @@ function editMovie(movie, id) {
 		.then(response => console.log(response.json()))
 		.then(() => location.reload())
 }
-function setToggleEventListener(){
+
+function setToggleEventListener() {
 	$(".editButton").on("click", function () {
-		$(".hideMe").toggle();
+		$(".hideMe").hide();
+		$(this).parent().find(".hideMe").show();
+		// $(this).parent().hide();
 	})
 
-	$(".deleteMovie").click(function() {
+	$(".deleteMovie").click(function () {
 		let uniqueID = $(this).attr("id");
 		console.log("clicked");
 		deleteMovie(uniqueID)
