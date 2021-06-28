@@ -1,11 +1,14 @@
 .hideMe{
     display: none;
 }
-
-html, body {
-    height: 100%;
-    background-color: darkslategrey;
+.hideOnEdit{
+    display: none;
 }
+
+/*html, body {*/
+/*    !*height: 100%;*!*/
+/*    background-color: darkslategrey;*/
+/*}*/
 
 .jumbotron {
     /*background-image:*/
@@ -14,7 +17,9 @@ html, body {
     background-repeat: no-repeat;
 }
 
-
+#newMovieForm{
+    background-color: #2f4f4f;
+}
 
 h2 {
     text-align: center;
