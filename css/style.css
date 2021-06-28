@@ -1,6 +1,9 @@
 .hideMe{
     display: none;
 }
+.hideOnEdit{
+    display: none;
+}
 
 /*html, body {*/
 /*    !*height: 100%;*!*/
@@ -14,7 +17,9 @@
     background-repeat: no-repeat;
 }
 
-
+#newMovieForm{
+    background-color: #2f4f4f;
+}
 
 h2 {
     text-align: center;
